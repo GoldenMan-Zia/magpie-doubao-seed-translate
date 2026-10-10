@@ -1,0 +1,8 @@
+{
+  "upstreamURL": "https://ark.cn-beijing.volces.com/api/v3/responses",
+  "upstreamModel": "doubao-seed-translation-250915",
+  "timeoutMs": 60000,
+  "batchConcurrency": 2,
+  "maxBatchItems": 32,
+  "maxInputChars": 24000
+}

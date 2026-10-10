@@ -1,0 +1,3 @@
+MAGPIE_DOUBAO_TRANSLATE_V1
+target-language: {{targetLanguage}}
+source-language: auto

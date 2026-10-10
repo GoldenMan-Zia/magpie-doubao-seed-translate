@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+.DS_Store
+*.log
+*.tgz
+.env
+.env.*
+plugin-auth.json
+plugins.json
+read-frog-config*.json
+config-backups/
