@@ -1,6 +1,6 @@
 {
   "name": "opencode-magpie-doubao-translate",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "license": "GPL-3.0-only",
   "repository": { "type": "git", "url": "https://github.com/GoldenMan-Zia/magpie-doubao-seed-translate.git" },
@@ -17,6 +17,9 @@
     "verify": "node scripts/verify.mjs"
   },
   "keywords": ["opencode", "opencode-plugin", "magpie", "doubao", "translation"],
-  "files": ["index.mjs", "src", "templates", "scripts", "test", "README.md", "TEST-REPORT.md", "LICENSE", "NOTICE.md", "CHANGELOG.md"],
-  "magpie": { "maxConcurrency": 2 }
+  "files": ["index.mjs", "src", "assets", "templates", "scripts", "test", "README.md", "TEST-REPORT.md", "LICENSE", "NOTICE.md", "CHANGELOG.md"],
+  "magpie": {
+    "maxConcurrency": 2,
+    "icon": "https://raw.githubusercontent.com/GoldenMan-Zia/magpie-doubao-seed-translate/main/assets/icon.svg"
+  }
 }

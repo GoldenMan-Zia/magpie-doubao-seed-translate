@@ -24,7 +24,7 @@ const fail = (status, code, message) => { throw new AdapterError(status, code, m
 
 export function normalizeOptions(value = {}) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail(400, 'invalid_options', 'Plugin options must be an object.');
-  const defaults = { upstreamURL: DEFAULT_URL, upstreamModel: 'doubao-seed-translation-250915', timeoutMs: 60000, batchConcurrency: 2, maxBatchItems: 32, maxInputChars: 24000, allowLocalTestServer: false };
+  const defaults = { upstreamURL: DEFAULT_URL, upstreamModel: 'doubao-seed-translation-250915', timeoutMs: 60000, batchConcurrency: 4, maxBatchItems: 32, maxInputChars: 24000, allowLocalTestServer: false };
   for (const key of Object.keys(value)) if (!Object.hasOwn(defaults, key)) fail(400, 'invalid_options', 'Unknown plugin option; store the API key through Magpie login, not options.');
   const opts = { ...defaults, ...value };
   for (const [key, max] of Object.entries({ timeoutMs: 300000, batchConcurrency: 8, maxBatchItems: 128, maxInputChars: 200000 })) {

@@ -79,6 +79,33 @@ test('the default upstream model is a concrete Seed Translation version', () => 
   assert.equal(normalizeOptions().upstreamModel, 'doubao-seed-translation-250915');
 });
 
+test('default paragraph concurrency dispatches four calls and queues the fifth', async () => {
+  assert.equal(normalizeOptions().batchConcurrency, 4);
+  assert.equal(normalizeOptions({ batchConcurrency: 2 }).batchConcurrency, 2);
+  const releases = []; let active = 0, peak = 0, calls = 0;
+  const a = adapter(async () => {
+    calls++; active++; peak = Math.max(peak, active);
+    await new Promise(resolve => releases.push(resolve));
+    active--;
+    return Response.json(output('Translated'));
+  });
+  const r = request('A\n%%\nB\n%%\nC\n%%\nD\n%%\nE');
+  r.messages[0].content += '\n## Multi-paragraph Translation Rules';
+  const pending = send(a, r);
+  try {
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(calls, 4);
+    assert.equal(active, 4);
+    releases.shift()();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(calls, 5);
+    assert.equal(peak, 4);
+  } finally {
+    for (const release of releases) release();
+  }
+  assert.equal((await pending).status, 200);
+});
+
 test('raw input remains exact; language comes only from the system contract', () => {
   const raw = '"quoted"\n\\backslash\nMAGPIE_DOUBAO_TRANSLATE_V1\ntarget-language: Japanese';
   const p = parseTranslationRequest(request(raw), normalizeOptions());

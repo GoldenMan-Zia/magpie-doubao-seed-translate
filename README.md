@@ -50,7 +50,7 @@ magpie plugin list
 {
   "upstreamModel": "doubao-seed-translation-250915",
   "timeoutMs": 60000,
-  "batchConcurrency": 2
+  "batchConcurrency": 4
 }
 ```
 
@@ -59,7 +59,7 @@ magpie plugin list
 命令行也可设置选项。在项目目录执行：
 
 ```sh
-magpie plugin options "$PWD" '{"upstreamModel":"doubao-seed-translation-250915","timeoutMs":60000,"batchConcurrency":2}'
+magpie plugin options "$PWD" '{"upstreamModel":"doubao-seed-translation-250915","timeoutMs":60000,"batchConcurrency":4}'
 ```
 
 此命令设置整份选项；未填写的项恢复为插件默认值。已有其他自定义选项时，应一并保留。完整示例见 [plugin-options.json](templates/plugin-options.json)。
@@ -69,9 +69,11 @@ magpie plugin options "$PWD" '{"upstreamModel":"doubao-seed-translation-250915",
 | `upstreamURL` | `https://ark.cn-beijing.volces.com/api/v3/responses` | 完整 HTTPS 上游接口 |
 | `upstreamModel` | `doubao-seed-translation-250915` | 模型 ID 或 `ep-…` 接入点 ID |
 | `timeoutMs` | `60000` | 整个请求含排队与所有段落的超时，单位毫秒 |
-| `batchConcurrency` | `2` | 每个账号实例同时发送的段落请求上限 |
+| `batchConcurrency` | `4` | 每个账号实例同时发送的段落请求上限 |
 | `maxBatchItems` | `32` | 一个请求的最大段落数 |
 | `maxInputChars` | `24000` | 原文总字符上限，不等于 token 上限 |
+
+`batchConcurrency` 可设置为 1–8，默认 4；频繁出现 429 时可以降到 2。它限制同一适配器实例的上游段落请求，与 Magpie 宿主的网关请求并发不是同一项。
 
 options 不接受 `apiKey`。自定义上游必须可信，该地址会收到原文和火山 API key。仅供开发测试的 `allowLocalTestServer` 不应在正常使用中开启。
 
