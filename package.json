@@ -20,6 +20,6 @@
   "files": ["index.mjs", "src", "assets", "templates", "scripts", "test", "README.md", "TEST-REPORT.md", "LICENSE", "NOTICE.md", "CHANGELOG.md"],
   "magpie": {
     "maxConcurrency": 2,
-    "icon": "https://cdn.jsdelivr.net/gh/GoldenMan-Zia/magpie-doubao-seed-translate@c9d62ab/assets/icon.svg"
+    "icon": "https://cdn.jsdelivr.net/gh/GoldenMan-Zia/magpie-doubao-seed-translate@6ffcd79791e565c052294696458a9727706db1d2/assets/icon.svg"
   }
 }
